@@ -1,10 +1,24 @@
-import React from "react";
-import { Text, View } from "react-native";
+import { Stack } from "expo-router";
+import React, { useState } from "react";
+import { View } from "react-native";
 
-export default function _layout() {
+export default function RootLayout() {
+  return <RootLayoutNav />;
+}
+function RootLayoutNav() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
-    <View>
-      <Text>_layout</Text>
-    </View>
+    <>
+      {loggedIn ? (
+        <View></View>
+      ) : (
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="(routes)/welcome-intro" />
+          <Stack.Screen name="(routes)/login" />
+        </Stack>
+      )}
+    </>
   );
 }
